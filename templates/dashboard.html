@@ -1,0 +1,94 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Panel</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-dark text-white">
+
+<div class="container mt-4">
+
+<h2 class="text-center mb-4">🔥 VIP ADMIN PANEL</h2>
+
+<div class="card bg-secondary p-3 mb-3">
+<h5>Total: {{total}}</h5>
+<h5>Active: {{active}}</h5>
+<h5>Banned: {{banned}}</h5>
+</div>
+
+<div class="row mb-4">
+
+<div class="col-md-6">
+<canvas id="chart"></canvas>
+</div>
+
+</div>
+
+<script>
+new Chart(document.getElementById("chart"), {
+    type: "bar",
+    data: {
+        labels: ["Total", "Active", "Banned"],
+        datasets: [{
+            label: "Stats",
+            data: [{{total}}, {{active}}, {{banned}}]
+        }]
+    }
+});
+</script>
+
+<form method="GET">
+<input name="q" class="form-control" placeholder="Search key">
+</form>
+
+<br>
+
+<form method="POST" action="/generate">
+<select name="type" class="form-control">
+<option value="1D">1 Day</option>
+<option value="7D">7 Day</option>
+<option value="30D">30 Day</option>
+<option value="LIFE">Lifetime</option>
+</select>
+
+<button class="btn btn-success mt-2">Generate Key</button>
+</form>
+
+<br>
+
+<table class="table table-dark table-striped">
+
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+{% for k in keys %}
+<tr>
+<td>{{k[0]}}</td>
+<td>{{k[2]}}</td>
+<td>{{k[5]}}</td>
+
+<td>
+<a class="btn btn-danger btn-sm" href="/delete/{{k[0]}}">Delete</a>
+<a class="btn btn-warning btn-sm" href="/ban/{{k[0]}}">Ban</a>
+</td>
+
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>
