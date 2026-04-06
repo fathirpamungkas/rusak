@@ -72,6 +72,10 @@ def create_token(username):
 
 login_attempts = {}
 
+@app.route("/test")
+def test():
+    return "Server OK"
+
 @app.route("/", methods=["GET","POST"])
 def login():
     ip = request.remote_addr
