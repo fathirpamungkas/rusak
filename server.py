@@ -1,3 +1,5 @@
+from flask import Flask, request, jsonify, render_template, redirect, session
+import sqlite3, time, hashlib
 import jwt
 
 SECRET_KEY = "API_SECRET"
@@ -5,7 +7,10 @@ from flask import Flask, request, jsonify, render_template, redirect, session
 from flask import Flask, request, jsonify
 import sqlite3, time
 import sqlite3
+import os
 
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
 import hashlib, time
 
 SECRET = "RIO_SECRET"
